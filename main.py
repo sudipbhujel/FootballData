@@ -3,10 +3,20 @@ import webbrowser
 import datetime
 
 from flask import Flask, render_template, request
+from flask_caching import Cache
 
 from api import get_data_from_url
 
+config = {
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 300,
+}
+
 app = Flask(__name__)
+
+app.config.from_mapping(config)
+
+cache = Cache(app)
 
 # Replace with your actual API key
 API_KEY = "d4c211a2fcbd4268b66b430969f34fbc"
@@ -84,6 +94,7 @@ def format_date(matches):
 
 
 @app.route("/")
+@cache.cached(timeout=20, query_string=True)
 def home():
     competition_id = request.args.get(
         "competition_id", "PL"
