@@ -88,25 +88,7 @@
           <th class="border-b text-slate-800 text-left p-4 pb-3 text-right w-2/5">Away Team</th>
         </tr>
       </thead>
-      <tbody>
-        {% for match in matches['matches'] %}
-        <tr>
-          <td><img alt="{{match['homeTeam']['name']}}" class="w-8 h-8" src="{{match['homeTeam']['logo']}}" />{{
-            match['homeTeam']['name'] }}</td>
-          <td><img alt="{{match['awayTeam']['name']}}" class="w-8 h-8" src="{{match['awayTeam']['logo']}}" />{{
-            match['awayTeam']['name'] }}</td>
-          <td>{{ match['utcDate'] }}</td>
-          <td>
-            {% if match['score']['fullTime']['homeTeam'] is not none and match['score']['fullTime']['awayTeam'] is not
-            none %}
-            {{ match['score']['fullTime']['homeTeam'] }} : {{ match['score']['fullTime']['awayTeam'] }}
-            {% else %}
-            Not played yet
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-
+      <tbody class="text-slate-600 text-sm">
         {% for match in matches['matches'] %}
         <tr class="border-b">
           <td class="p-4">
@@ -117,14 +99,16 @@
           </td>
 
           <td class="flex flex-col items-center gap-1 py-2">
+            {% if match['score']['fullTime']['homeTeam'] is not none and match['score']['fullTime']['awayTeam'] is not
+            none %}
             <div class="text-center px-2 py-1 w-16 bg-slate-900 text-white rounded-lg text-base font-medium">
-              {% if match['score']['fullTime']['homeTeam'] is not none and match['score']['fullTime']['awayTeam'] is not
-              none %}
               {{ match['score']['fullTime']['homeTeam'] }} : {{ match['score']['fullTime']['awayTeam'] }}
-              {% else %}
-              Not played yet
-              {% endif %}
             </div>
+            {% else %}
+            <div class="text-center px-2 py-1 bg-slate-700 text-white rounded-lg">
+              Not played yet
+            </div>
+            {% endif %}
             <p>{{ match['utcDate']}}</p>
           </td>
           <td class="p-4">

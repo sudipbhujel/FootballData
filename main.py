@@ -102,6 +102,7 @@ def home():
     set_logos_to_matches(completed_matches)
 
     format_date(completed_matches)
+    format_date(matches)
 
     return render_template(
         "index.html",
