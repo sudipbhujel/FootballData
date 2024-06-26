@@ -63,7 +63,7 @@ def get_completed_matches(competition_id, season):
 
 def get_club_flags(competition_id, season):
     global logo_list
-    url = f"https://cdn.logosports.net/club/fb/list?region={competition_id}"
+    url = f"https://cdn.clublogos.io/club/fb/list?region={competition_id}"
     logo_list = get_data_from_url(url, {}, {})
 
 
